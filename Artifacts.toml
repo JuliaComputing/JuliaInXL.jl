@@ -1,5 +1,5 @@
 [JuliaInXL]
-git-tree-sha1 = "242a937185fe27c1e395a34c2f50eaa7f1c240a0"
+git-tree-sha1 = "b8a5c1175aafbc57cda7b3c529718d9fd9ff8f2f"
 os = "windows"
 
     [[JuliaInXL.download]]
