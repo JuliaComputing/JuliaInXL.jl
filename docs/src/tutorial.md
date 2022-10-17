@@ -1,9 +1,8 @@
-# Using JuliaInXL for JuliaPro
+# Using JuliaInXL 
 
 ## Julia Office Ribbon Tab
----------------------------
 
-If JuliaInXL was selected as a component to install with your JuliaPro installation, then in most cases a Julia process should launch automatically when starting your Excel session.
+If JuliaInXL was installed via the Julia package manager, then in most cases a Julia process should launch automatically when starting your Excel session.
 
 ![](assets/media/image77.png)
 
@@ -11,15 +10,11 @@ A Julia tab will also be present in the Office Ribbon that contains a number of 
 
 ![](assets/media/image78.png)
 
-In the current version of JuliaInXL, if your Excel installation has loaded the "Analysis Toolpak - VBA" add-in, then the Julia process does not launch automatically on startup.  In this scenario, you must launch the julia.exe process manually using the "Launch Local Julia" button as shown below.
-
-![](assets/media/image79.png)
-
 The "Launch Local Julia" button will launch a new child Julia process, as well as start a JuliaInXL server process that listens on the currently defined TCP endpoint.
 
 When this button is pressed, any current child Julia process is shutdown before launching a new Julia process.
 
-If an execution of `jlcall` has resulted in a `#JuliaNotConnected` error, then either the "Launch Local Julia" button or the "Reconnect" button (described below) can be used to re-establish a connection to a JuliaInXL server process.  The "Launch Local Julia" button launches a new julia.exe process, while the "Reconnect" button attempts to connect to a JuliaInXL server in an existing julia.exe process.
+![](assets/media/image79.png)
 
 Adjacent to the "Launch Local Julia" button is a "Julia File Path" text box for entering the path to a file that can be loaded into the Julia process via the `include` command.
 
@@ -43,31 +38,9 @@ In the screenshot below, we have included the "sim.jl" file from the "test" dire
 
 ![](assets/media/image85.png)
 
-Adjacent to the "Julia File Path" text box is the "JuliaInXL TCP Endpoint" textbox.  This textbox displays the currently configured TCP endpoint to use when Excel connects to a JuliaInXL server.  
+Adjacent to the "Julia File Path" text box is the "JuliaInXL TCP Endpoint" textbox.  This textbox displays the currently configured TCP endpoint to use when Excel connects to a JuliaInXL server. The default value is sufficient for most users. This should only be changed if you start and manage your own server process.  
 
 ![](assets/media/image86.png)
-
-By default, the endpoint value displayed in this textbox is associated with the value stored in the "JuliaInXL_Default_Endpoint" entry of the JuliaPro Windows registry key.
-
-For a "Current User" installation of JuliaPro, this registry key is located at "HKEY_CURRENT_USER\\Software\\JuliaProfessional\\0.5.0.4\\".  
-
-For an "All Users" installation of JuliaPro, this registry key is located at "HKEY_LOCAL_MACHINE\\Software\\JuliaProfessional\\0.5.0.4\\".
-
-For a "Shared Drive" installation of JuliaPro, no Windows registry keys are written on installation, but JuliaInXL will also look to see if an environment variable JULIAINXL_DEFAULT_ENDPOINT has been set.  
-
-As shown below, for "Shared Drive" installations, you should both set a value for JULIAINXL_DEFAULT_ENDPOINT, and also ensure that the path to the julia.exe executable included in your JuliaPro installation is included in a Path environment variable for either your system or your current user account.
-
-![](assets/media/image87.png)
-
-For connections made to Julia processes executing on the local machine, the hostname included in the provided TCP endpoint should always be "localhost".  On the Julia side, the IP address `127.0.0.1` is used when creating the connection endpoint from which the JuliaInXL server can accept connections.  Connections endpoints entered into the "JuliaInXL TCP Endpoint" on the Excel side should use the DNS name associated with an IP address, while on the Julia side the IP address should be used directly.
-
-If you wish to configure your JuliaInXL session to connect to a particular JuliaInXL server, possibly on a different machine, then the value of the current endpoint can be changed either manually in the "JuliaInXL TCP Endpoint" text box, through the Windows Registry or via an environment variable.  
-
-Using the Windows Registry or an Environment variable allows for the possibility of connecting to a remote JuliaInXL server session as part of an automated workflow that launches Excel and makes use of Julia.
-
-Note that with the current version of JuliaInXL, if the Excel installation has loaded the "Analysis Toolpak - VBA" Add-In, then JuliaInXL cannot be used in the automated workflow described above.
-
-Also note that regardless of the endpoint value (e.g. tcp://hostname:<current_port_number>) provided within the Windows Registry, in a JULIAINXL_DEFAULT_ENDPOINT environment variable, entered manually in the "JuliaInXL TCP Endpoint" text box, if a user presses the "Launch Local Julia" button, then the endpoint value in the "JuliaInXL TCP Endpoint" text box will be updated to point to "tcp://localhost:<current_port_number>" before launching a new Julia process to create a JuliaInXL server.
 
 Below the "JuliaInXL TCP Endpoint" textbox is the "Reconnect" button.  This button resets the TCP client endpoint on the Excel side of the connection, and then attempts to reconnect to the existing JuliaInXL server.  
 
@@ -106,13 +79,6 @@ By copying the contents of the cell in which `jlcall` was executed into multiple
 
 ![](assets/media/image94.png)
 
-### Resolving `#JuliaNotConnected!` error messages
-
-If an execution of `jlcall` has resulted in a `#JuliaNotConnected!` error, then either the "Launch Local Julia" button or the "Reconnect" button (described below) can be used to re-establish a connection to a JuliaInXL server process.  The "Launch Local Julia" button launches a new julia.exe process, while the "Reconnect" button attempts to connect to a JuliaInXL server in an existing julia.exe process.
-
-### Resolving `#JuliaEmptyCell!` error messages
-
-The `jlcall` function does not currently accept arguments whose inputs are cells or cell ranges that contain empty cells.  To resolve a `#JuliaEmptyCell!` error, the input cells or cell ranges must be modified such that they contain a value of some type.
 
 ## Defining global variables via `jlsetvar`
 
@@ -128,14 +94,4 @@ If you wish to define a Julia expression to be evaluated in the Julia process ho
 parse_and_eval(arg) = eval(parse(arg::String))
 ```
 
-## Connecting to a separate JuliaInXL server
 
-As mentioned previously, one can connect a single Excel session to different Julia sessions by changing the port number within the Julia Office Ribbon tab.
-
-Below is an example of changing the port number of the current Julia session from the default 9999 port to 9998.
-
-![](assets/media/image95.png)
-
-And then connecting that same Excel session to a separate Julia session where a different connection object has been associated with the new port number.
-
-![](assets/media/image96.png)
