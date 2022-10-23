@@ -1,6 +1,6 @@
 # JuliaInXL 
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://docs.juliahub.com/Miletus/Sk1m2/)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://docs.juliahub.com/JuliaInXL/AZenl/1.2.0/)
 [![version](https://juliahub.com/docs/JuliaInXL/version.svg)](https://juliahub.com/ui/Packages/JuliaInXL/AZenl)
 
 JuliaInXL.jl is a Julia package that allows Julia functions to be called from within Microsoft Excel. This software
@@ -46,7 +46,7 @@ Julia functions can be called from Excel using the jlcall worksheet function. Th
 
 ### Further documentation 
 
-See our [documentation](https://docs.juliahub.com/JuliaInXL/AZenl/0.0.2/) for more details.  
+See our [documentation](https://docs.juliahub.com/JuliaInXL/AZenl/1.2.0/) for details on how to use this package. 
 
 ### Trademarks
 
