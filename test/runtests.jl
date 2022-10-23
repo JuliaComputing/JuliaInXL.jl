@@ -1,6 +1,7 @@
 #Copyright (c) 2015: Julia Computing Inc. MIT Licensed.
 
 using JuliaInXL
+using Dates
 using Test
 
 @test xldate(1; use1904windowing=true,roundtoSeconds=true) == Date(1904, 1, 2)
