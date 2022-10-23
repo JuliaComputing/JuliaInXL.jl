@@ -1,7 +1,7 @@
 # JuliaInXL 
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://docs.juliahub.com/Miletus/Sk1m2/)
-[![version](https://juliahub.com/docs/Miletus/version.svg)](https://juliahub.com/ui/Packages/Miletus/Sk1m2)
+[![version](https://juliahub.com/docs/JuliaInXL/version.svg)](https://juliahub.com/ui/Packages/JuliaInXL/AZenl)
 
 JuliaInXL.jl is a Julia package that allows Julia functions to be called from within Microsoft Excel. This software
 included Julia code that is present in this repository, and a corresponding [native (ie XLL) plugin](https://github.com/JuliaComputing/JuliaInXL)
