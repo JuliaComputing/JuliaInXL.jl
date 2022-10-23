@@ -1,7 +1,7 @@
-#Copyright (c) 2015: Julia Computing Inc. All rights reserved.
+#Copyright (c) 2015: Julia Computing Inc. MIT Licensed.
 
 using JuliaInXL
-using Base.Test
+using Test
 
 @test xldate(1; use1904windowing=true,roundtoSeconds=true) == Date(1904, 1, 2)
 @test xldate(1) == Date(1900, 1,1)

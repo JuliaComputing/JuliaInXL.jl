@@ -1,11 +1,7 @@
-#Copyright 2015-16 Julia Computing Inc. All rights reserved
-
+#Copyright 2015-22 Julia Computing Inc. MIT License. 
 #This file is used as an example to demo the functionality of this package. 
 
 using Distributions
-using JuliaInXL
-using Logging
-Logging.configure(level=DEBUG)
 
 f(u) = exp(-u^2/2)/√(2pi)
 
@@ -27,13 +23,9 @@ function simulate(num::Number)
 end
 
 function simulateTime(num)
-    tic()
-    r = simulate(num)
-    t = toc()
-    return (r, t)
+    r = @timed simulate(num)
+    return (r.value, r.time)
 end
 
 simulateArray(x::Array) = [simulate(i) for i in x]
 
-
-#process_async([simulate, simulateTime], "tcp://127.0.0.1:9999"; bind=true)

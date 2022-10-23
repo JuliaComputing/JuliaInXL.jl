@@ -1,8 +1,10 @@
-#Copyright (c) 2015: Julia Computing Inc. All rights reserved.
-module JuliaInXL
+#Copyright (c) 2015-2022: Julia Computing Inc. MIT License
+ baremodule JuliaInXL
+
+ using Base
+ eval(x) = Core.eval(JuliaInXL, x)
 
 export xldate, parse_and_eval, jlsetvar
-#import Base.include_from_node1; export include_from_node1
 
 using Reexport
 @reexport using JuliaWebAPI
@@ -53,9 +55,10 @@ end
 # Overriding base include method to avoid serializing issue
 # Issue is `include` returns the last thing that it encounters in the file. Which may be something that is not serializable. To avoid the error, we add a `nothing` at the end
 
-function include(x)
-    Base.MainInclude.include(x)
-    nothing
+function include(fname::AbstractString)
+    isa(fname, String) || (fname = Base.convert(String, fname)::String)
+    Base._include(identity, Main, fname)
+    return nothing
 end
 
 # entry point for new thread
